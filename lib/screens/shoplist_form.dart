@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Form Tambah Produk',
+            'Add Item Form',
           ),
         ),
         backgroundColor: Colors.indigo,
@@ -45,8 +47,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Nama Produk",
-                  labelText: "Nama Produk",
+                  hintText: "Item Name",
+                  labelText: "Item Name",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -58,7 +60,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Nama tidak boleh kosong!";
+                    return "Name cannot be empty!";
                   }
                   return null;
                 },
@@ -68,8 +70,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Harga",
-                  labelText: "Harga",
+                  hintText: "Price",
+                  labelText: "Price",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -82,10 +84,10 @@ class _ShopFormPageState extends State<ShopFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Harga tidak boleh kosong!";
+                    return "Price cannot be empty!";
                   }
                   if (int.tryParse(value) == null) {
-                    return "Harga harus berupa angka!";
+                    return "Price must be a number!";
                   }
                   return null;
                 },
@@ -95,8 +97,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Deskripsi",
-                  labelText: "Deskripsi",
+                  hintText: "Description",
+                  labelText: "Description",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -109,7 +111,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Deskripsi tidak boleh kosong!";
+                    return "Description cannot be empty!";
                   }
                   return null;
                 },
@@ -126,19 +128,17 @@ class _ShopFormPageState extends State<ShopFormPage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       // Kirim ke Django dan tunggu respons
-                      // OK TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                       final response = await request.postJson(
                           "http://vina-myrnauli-tutorial.pbp.cs.ui.ac.id/create-flutter/",
                           jsonEncode(<String, String>{
                             'name': _name,
                             'price': _price.toString(),
                             'description': _description,
-                            // TODO: Sesuaikan field data sesuai dengan aplikasimu
                           }));
                       if (response['status'] == 'success') {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
-                          content: Text("Produk baru berhasil disimpan!"),
+                          content: Text("New item successfully saved!"),
                         ));
                         Navigator.pushReplacement(
                           context,
@@ -147,8 +147,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                       } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
-                          content:
-                              Text("Terdapat kesalahan, silakan coba lagi."),
+                          content: Text("There is an error, please try again."),
                         ));
                       }
                     }

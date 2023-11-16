@@ -30,7 +30,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Add Item Form',
+            'Form Tambah Produk',
           ),
         ),
         backgroundColor: Colors.indigo,
@@ -47,8 +47,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Item Name",
-                  labelText: "Item Name",
+                  hintText: "Nama Produk",
+                  labelText: "Nama Produk",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -60,7 +60,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Name cannot be empty!";
+                    return "Nama tidak boleh kosong!";
                   }
                   return null;
                 },
@@ -70,8 +70,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Price",
-                  labelText: "Price",
+                  hintText: "Harga",
+                  labelText: "Harga",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -84,10 +84,10 @@ class _ShopFormPageState extends State<ShopFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Price cannot be empty!";
+                    return "Harga tidak boleh kosong!";
                   }
                   if (int.tryParse(value) == null) {
-                    return "Price must be a number!";
+                    return "Harga harus berupa angka!";
                   }
                   return null;
                 },
@@ -97,8 +97,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: "Description",
-                  labelText: "Description",
+                  hintText: "Deskripsi",
+                  labelText: "Deskripsi",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
@@ -111,7 +111,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Description cannot be empty!";
+                    return "Deskripsi tidak boleh kosong!";
                   }
                   return null;
                 },
@@ -138,7 +138,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                       if (response['status'] == 'success') {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
-                          content: Text("New item successfully saved!"),
+                          content: Text("Produk baru berhasil disimpan!"),
                         ));
                         Navigator.pushReplacement(
                           context,
@@ -147,7 +147,8 @@ class _ShopFormPageState extends State<ShopFormPage> {
                       } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
-                          content: Text("There is an error, please try again."),
+                          content:
+                              Text("Terdapat kesalahan, silakan coba lagi."),
                         ));
                       }
                     }

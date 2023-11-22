@@ -53,13 +53,13 @@ android {
 
     signingConfigs {
         release {
-                storeFile file("../../release-keystore.jks")
+                storeFile file("../../upload-keystore.jks")
                 storePassword = "$System.env.KEY_PASSWORD"
-                keyAlias = "release"
+                keyAlias = "upload"
                 keyPassword = "$System.env.KEY_PASSWORD"
         }
     }
-    
+
     buildTypes {
         release {
             signingConfig signingConfigs.release
